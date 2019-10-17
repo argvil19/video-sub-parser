@@ -19,6 +19,12 @@ services:
       - backend
     volumes:
       - .:/home/node/app
+  server:
+    build: ./server
+    ports:
+      - 8000:8000
+    volumes:
+      - ./server:/home/node/app
 
 networks:
   backend:
