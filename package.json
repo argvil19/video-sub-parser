@@ -1,0 +1,23 @@
+{
+  "name": "video-worker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ffmpeg-extract-audio": "^1.0.2",
+    "kue": "^0.11.6",
+    "mongodb": "^3.3.3",
+    "node-fetch": "^2.6.0",
+    "uid": "0.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
