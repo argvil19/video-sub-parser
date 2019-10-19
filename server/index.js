@@ -12,7 +12,7 @@ const initApp = async () => {
         const result = await db.findOne({ mediaId })
 
         if (result) {
-            return res.send(result.subs)
+            return res.send(result)
         }
 
         return res.sendStatus(404)
