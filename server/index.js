@@ -8,7 +8,7 @@ const initDb = require('./db')
 const initApp = async () => {
     const db = await initDb()
 
-    app.use(corts())
+    app.use(cors())
 
     app.get('/:id', async (req, res) => {
         const mediaId = req.params.id
