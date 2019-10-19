@@ -14,6 +14,13 @@ const initApp = async () => {
 
         console.log('Incoming job: ', mediaId)
 
+        const exists = await db.findOne({ mediaId })
+        
+        if (exists) {
+            console.log('Cant push duplicated mediaId')
+            return done()
+        }
+
         const insert = await db.insertOne({
             mediaId: mediaId,
             ready: false,
