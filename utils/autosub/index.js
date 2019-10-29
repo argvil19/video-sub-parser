@@ -7,7 +7,7 @@ module.exports = (opts) => new Promise((resolve, reject) => {
         throw new Error('An input is required')
     }
 
-    let { input, output, format = 'srt', srcLanguage = 'en', dstLanguage = 'en', concurrency } = opts
+    let { input, output, format = 'vtt', srcLanguage = 'en', dstLanguage = 'en', concurrency } = opts
 
     if (!output) {
         output = `/tmp/${uid(15)}`
