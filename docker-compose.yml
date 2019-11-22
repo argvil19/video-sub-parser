@@ -11,6 +11,7 @@ services:
   app:
     build:
       context: .
+    env_file: ./.env
     depends_on:
       - redis
     links:
@@ -18,13 +19,14 @@ services:
     networks:
       - backend
     volumes:
-      - .:/home/node/app
+      - ./app:/home/node/app/app
   server:
     build: ./server
+    env_file: ./.env
     ports:
       - 8000:8000
     volumes:
-      - ./server:/home/node/app
+      - ./server/app:/home/node/server/app
 
 networks:
   backend:

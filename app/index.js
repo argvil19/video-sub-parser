@@ -1,4 +1,3 @@
-require('dotenv').config()
 const queue = require('./queue')
 const {
     getSubtitles,
