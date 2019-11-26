@@ -36,7 +36,7 @@ const initApp = async () => {
         } catch(err) {
             await db.updateOne({
                 mediaId
-            }, { $set: { subs: 'WEBVTT\n\n', ready: true } })
+            }, { $set: { subs: { data: 'WEBVTT\n\n' }, ready: true } })
             return done()
         }
 
