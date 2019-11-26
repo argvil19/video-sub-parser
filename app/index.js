@@ -34,7 +34,6 @@ const initApp = async () => {
                 _id: insert.insertedId
             }, { $set: { subs, ready: true } })
         } catch(err) {
-            console.log(err)
             await db.updateOne({
                 _id: insert.insertedId
             }, { $set: { subs: 'WEBVTT\n\n', ready: true } })

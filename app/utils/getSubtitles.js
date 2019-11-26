@@ -2,10 +2,20 @@ const autosub = require('./autosub')
 const fs = require('fs')
 
 module.exports = async video => {
-    const sub = await autosub({
-        input: video
-    })
-    fs.unlinkSync(video)
+    try {
+        const sub = await autosub({
+            input: video
+        })
+        fs.unlinkSync(video)
+    
+        return sub
+    } catch(err) {
+        try {
+            fs.unlinkSync(video)
+        } catch(err) {
+            // no local file, continue...
+        }
 
-    return sub
+        throw new Error(err.message)
+    }
 }
