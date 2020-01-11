@@ -12,6 +12,18 @@ const initApp = async () => {
     app.use(cors())
     app.use(bodyParser())
 
+    app.post('/push', async (req, res) => {
+        const { mediaId, key } = req.body
+
+        if (key !== process.env.PUSH_QUEUE_KEY) {
+            return res.status(400).send({ message: 'Incorrect key' })
+        }
+
+        queue.create(process.env.QUEUE_NAME, { mediaId }).save()
+
+        return res.send({ message: 'OK' })
+    })
+
     app.get('/:id', async (req, res) => {
         const mediaId = req.params.id
         const result = await db.findOne({ mediaId })
@@ -42,18 +54,6 @@ const initApp = async () => {
         })
 
         return res.send('OK')
-    })
-
-    app.post('/push', async (req, res) => {
-        const { mediaId, key } = req.body
-
-        if (key !== process.env.PUSH_QUEUE_KEY) {
-            return res.status(400).send({ message: 'Incorrect key' })
-        }
-
-        queue.create(process.env.QUEUE_NAME, { mediaId }).save()
-
-        return res.send({ message: 'OK' })
     })
 
     app.listen(port, () => console.log(`Server running on port ${port}`))
