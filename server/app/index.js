@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = process.env.PORT
 const initDb = require('./db')
+const queue = require('./queue')
 
 const initApp = async () => {
     const db = await initDb()
@@ -22,7 +23,7 @@ const initApp = async () => {
         return res.sendStatus(404)
     })
 
-    app.post('/:id', async(req, res) => {
+    app.post('/:id', async (req, res) => {
         if (!req.body.subs) {
             return res.sendStatus(400)
         }
@@ -41,6 +42,14 @@ const initApp = async () => {
         })
 
         return res.send('OK')
+    })
+
+    app.post('/push', async (req, res) => {
+        const { mediaId } = req.body
+
+        queue.create(process.env.QUEUE_NAME, { mediaId }).save()
+
+        return res.send({ message: 'OK' })
     })
 
     app.listen(port, () => console.log(`Server running on port ${port}`))
