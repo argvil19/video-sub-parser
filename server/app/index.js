@@ -45,7 +45,11 @@ const initApp = async () => {
     })
 
     app.post('/push', async (req, res) => {
-        const { mediaId } = req.body
+        const { mediaId, key } = req.body
+
+        if (key !== process.env.PUSH_QUEUE_KEY) {
+            return res.status(400).send({ message: 'Incorrect key' })
+        }
 
         queue.create(process.env.QUEUE_NAME, { mediaId }).save()
 
