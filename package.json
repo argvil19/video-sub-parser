@@ -12,6 +12,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "ffmpeg-extract-audio": "^1.0.2",
+    "form-data": "^3.0.0",
     "kue": "^0.11.6",
     "mongodb": "^3.3.3",
     "node-fetch": "^2.6.0",
