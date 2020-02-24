@@ -5,9 +5,9 @@ const FormData = require('form-data')
 
 module.exports = class IPFS {
   constructor() {
-    this.apiBase = "http://localhost:4001";
-    this.downloadBase = "/file?id=[FILE_ID]";
-    this.uploadBase = "/file";
+    this.apiBase = 'http://localhost:4001';
+    this.downloadBase = '/file?id=[FILE_ID]';
+    this.uploadBase = '/file';
   }
 
   generateUploadUrl() {
@@ -23,7 +23,7 @@ module.exports = class IPFS {
       const filePath = `/tmp/${uid(10)}`
       const file = fs.createWriteStream(filePath)
       const response = await fetch(this.generateDownloadUrl(fileId), {
-        method: "get",
+        method: 'get',
       });
       response.body.pipe(file)
 
@@ -31,13 +31,13 @@ module.exports = class IPFS {
     })
   }
 
-  async uploadFile(file, params = {}) {
+  async uploadFile(file) {
     const body = new FormData()
 
     body.append('file', file)
 
     return fetch(this.generateUploadUrl(), {
-      method: "post",
+      method: 'post',
       body
     }).then((res) => res.json());
   }
