@@ -5,7 +5,7 @@ const FormData = require('form-data')
 
 module.exports = class IPFS {
   constructor() {
-    this.apiBase = 'http://localhost:4001';
+    this.apiBase = process.env.IPFS_HOST;
     this.downloadBase = '/file?id=[FILE_ID]';
     this.uploadBase = '/file';
   }
