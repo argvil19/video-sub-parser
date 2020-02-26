@@ -12,6 +12,15 @@ const initApp = async () => {
     app.use(cors())
     app.use(bodyParser())
 
+    app.get('/all', async (req, res) => {
+        // Get all ipfs ids for replication purposes
+        let ids = await db.find({}).project({ mediaId: 1, _id: 0 })
+        ids = await ids.toArray()
+        ids = ids.map(item => item.mediaId)        
+
+        return res.send(ids);
+    })
+
     app.post('/push', async (req, res) => {
         const { mediaId, key } = req.body
 
